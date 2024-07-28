@@ -1,14 +1,19 @@
 FROM node:18.6.0-alpine
 
-WORKDIR /usr/src/app
+# Set the working directory to D:/Docker
+WORKDIR /Docker
 
+# Copy package.json to the working directory
 COPY ./package.json .
 
-RUN npm install 
+# Install the dependencies
+RUN npm install
 
-
+# Copy the rest of the application files to the working directory
 COPY . .
 
+# Build the application
 RUN npm run build
 
-ENTRYPOINT node dist/main.js
+# Command to run the application
+CMD ["node", "dist/main.js"]
